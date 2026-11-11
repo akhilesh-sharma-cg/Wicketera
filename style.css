@@ -967,3 +967,21 @@ footer p {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* WICKETRA informational page links */
+.footer-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  padding-top: 16px;
+}
+.footer-links a {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.footer-links a:hover { color: var(--green); }
