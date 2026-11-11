@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b0a">
+  <title>WICKETRA | Admin</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="WICKETRA Home">WICKET<span>RA</span></a>
+
+    <nav class="dashboard-nav" aria-label="Main navigation">
+      <a href="#overview" class="active">Home</a>
+      <a href="#allTournaments">Tournaments</a>
+      <a href="#teams">Teams</a>
+      <a href="#players">Players</a>
+      <a href="#settings">Settings</a>
+    </nav>
+
+    <div class="admin-info">
+      <span>ADMIN</span>
+      <button type="button" id="logoutButton">Log Out ↗</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <!-- HOME -->
+    <section id="overview" class="page-section">
+      <p class="eyebrow">WICKETRA MANAGEMENT</p>
+      <h1>Welcome back, <span>Admin</span></h1>
+      <p class="subtitle">Everything you need to run your cricket tournaments.</p>
+
+      <div class="welcome-card">
+        <div>
+          <p class="eyebrow">THE PULSE OF EVERY BALL</p>
+          <h2>Run your tournament, simply.</h2>
+          <p>Create a tournament, add teams and manage every match from one place.</p>
+          <button type="button" class="primary-btn" data-page="createTournament">＋ Create Tournament</button>
+        </div>
+        <div class="cricket-icon" aria-hidden="true">🏏</div>
+      </div>
+
+      <div class="quick-actions">
+        <button type="button" data-page="teams">＋ Add Team</button>
+        <button type="button" data-page="players">＋ Add Player</button>
+        <button type="button" data-page="matches">＋ Create Match</button>
+        <button type="button" data-page="scoring">Live Scoring ↗</button>
+      </div>
+
+      <div class="dashboard-grid">
+        <a href="#allTournaments" class="dashboard-card">
+          <span>🏆</span><h3>Your Tournaments</h3>
+          <p>View and manage all your competitions.</p><small>View Tournaments →</small>
+        </a>
+        <a href="#teams" class="dashboard-card">
+          <span>👥</span><h3>Teams</h3>
+          <p>Create teams once and reuse them.</p><small>Manage Teams →</small>
+        </a>
+        <a href="#players" class="dashboard-card">
+          <span>🏏</span><h3>Players</h3>
+          <p>Manage player profiles and team squads.</p><small>Manage Players →</small>
+        </a>
+        <a href="#scoring" class="dashboard-card">
+          <span>📊</span><h3>Live Scoring</h3>
+          <p>Record each ball and update match scores.</p><small>Open Scoring →</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- TOURNAMENT LIST -->
+    <section id="allTournaments" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">YOUR COMPETITIONS</p>
+        <h1> Tournaments</h1>
+        <p class="subtitle">Create a new tournament or continue managing an existing one.</p>
+      </div>
+      <button type="button" class="primary-btn" data-page="createTournament">＋ Create Tournament</button>
+      <div class="team-list">
+        <h2>All Tournaments</h2>
+        <div id="tournamentsList">Loading tournaments...</div>
+      </div>
+      <div class="quick-actions tournament-shortcuts">
+        <button type="button" data-page="registerTeams">Register Teams</button>
+        <button type="button" data-page="fixtures">Fixtures</button>
+        <button type="button" data-page="standings">Points Table</button>
+        <button type="button" data-page="matches">Matches</button>
+      </div>
+    </section>
+
+    <!-- CREATE TOURNAMENT -->
+    <section id="createTournament" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="allTournaments">← Tournaments</button>
+        <p class="eyebrow">TOURNAMENT SETUP</p>
+        <h1>Create <span>Tournament</span></h1>
+        <p class="subtitle">Enter the basic details to get your competition started.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>＋ Tournament Details</h2>
+        <form id="tournamentForm" class="management-form">
+          <label for="tournamentName">Tournament Name</label>
+          <input type="text" id="tournamentName" placeholder="Example: WICKETRA Premier League" required>
+
+          <label for="tournamentDescription">Description (Optional)</label>
+          <textarea id="tournamentDescription" placeholder="A short description of your tournament"></textarea>
+
+          <label for="tournamentVenue">Venue</label>
+          <input type="text" id="tournamentVenue" placeholder="Ground or stadium name" required>
+
+          <label for="tournamentCity">City</label>
+          <input type="text" id="tournamentCity" placeholder="Example: Surat" required>
+
+          <label for="tournamentState">State (Optional)</label>
+          <input type="text" id="tournamentState" placeholder="Example: Gujarat">
+
+          <label for="tournamentStart">Start Date and Time</label>
+          <input type="datetime-local" id="tournamentStart" required>
+
+          <label for="tournamentEnd">End Date (Optional)</label>
+          <input type="datetime-local" id="tournamentEnd">
+
+          <label for="tournamentFormat">Tournament Format</label>
+          <select id="tournamentFormat" required>
+            <option value="league">League</option>
+            <option value="knockout">Knockout</option>
+            <option value="group_knockout">Group + Knockout</option>
+          </select>
+
+          <label for="tournamentMatchFormat">Match Format</label>
+          <select id="tournamentMatchFormat" required>
+            <option value="T20">T20</option>
+            <option value="ODI">ODI</option>
+            <option value="Test">Test</option>
+            <option value="Custom">Custom</option>
+          </select>
+
+          <label for="tournamentOvers">Overs Per Innings</label>
+          <input type="number" id="tournamentOvers" value="20" min="1" max="100" required>
+
+          <label for="tournamentEntryFee">Entry Fee (₹)</label>
+          <input type="number" id="tournamentEntryFee" value="0" min="0" step="0.01">
+
+          <button type="submit" id="createTournamentButton">Create Tournament & Continue →</button>
+          <p id="tournamentMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- TEAMS -->
+    <section id="teams" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">TEAM MANAGEMENT</p>
+        <h1>Your <span>Teams</span></h1>
+        <p class="subtitle">Save each team once. Use it in any tournament or match.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>＋ Create New Team</h2>
+        <form id="teamForm" class="management-form">
+          <label for="teamName">Team Name</label>
+          <input type="text" id="teamName" placeholder="Example: Mumbai Warriors" required>
+          <label for="teamShortName">Short Name</label>
+          <input type="text" id="teamShortName" placeholder="Example: MUM" maxlength="10" required>
+          <label for="teamCity">City (Optional)</label>
+          <input type="text" id="teamCity" placeholder="Example: Mumbai">
+          <button type="submit" id="addTeamButton">Save Team</button>
+          <p id="teamMessage" role="status"></p>
+        </form>
+      </div>
+      <div class="team-list">
+        <h2>Saved Teams</h2>
+        <div id="teamsList">Loading teams...</div>
+      </div>
+    </section>
+
+    <!-- REGISTER TEAMS -->
+    <section id="registerTeams" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="allTournaments">← Tournaments</button>
+        <p class="eyebrow">TOURNAMENT SETUP</p>
+        <h1>Add <span>Teams</span></h1>
+        <p class="subtitle">Choose saved teams to participate in this tournament.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>Register a Team</h2>
+        <label for="registerTournament">Select Tournament</label>
+        <select id="registerTournament"><option value="">Select tournament</option></select>
+        <label for="registerTournamentTeam">Select Team</label>
+        <select id="registerTournamentTeam"><option value="">Select team</option></select>
+        <button type="button" id="registerTournamentTeamButton">＋ Register Team</button>
+        <p id="registerTeamMessage" role="status"></p>
+        <button type="button" class="secondary-btn" data-page="teams">＋ Create a New Team</button>
+      </div>
+    </section>
+
+    <!-- FIXTURES -->
+    <section id="fixtures" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="allTournaments">← Tournaments</button>
+        <p class="eyebrow">TOURNAMENT MANAGEMENT</p>
+        <h1>Match <span>Fixtures</span></h1>
+        <p class="subtitle">Create and view the tournament schedule.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>Generate Fixtures</h2>
+        <label for="fixtureTournament">Select Tournament</label>
+        <select id="fixtureTournament"><option value="">Select tournament</option></select>
+        <button type="button" id="generateFixturesButton">Generate Fixtures</button>
+        <p id="fixtureMessage" role="status"></p>
+      </div>
+      <div class="team-list">
+        <h2>Scheduled Matches</h2>
+        <div id="fixturesList">Select a tournament to view fixtures.</div>
+      </div>
+    </section>
+
+    <!-- POINTS TABLE -->
+    <section id="standings" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="allTournaments">← Tournaments</button>
+        <p class="eyebrow">TOURNAMENT MANAGEMENT</p>
+        <h1>Points <span>Table</span></h1>
+        <p class="subtitle">Team rankings update as match results are recorded.</p>
+      </div>
+      <div class="team-list">
+        <label for="standingsTournament">Select Tournament</label>
+        <select id="standingsTournament"><option value="">Select tournament</option></select>
+        <div id="tournamentStandings">Select a tournament to view standings.</div>
+      </div>
+    </section>
+
+    <!-- PLAYERS -->
+    <section id="players" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">PLAYER MANAGEMENT</p>
+        <h1>Your <span>Players</span></h1>
+        <p class="subtitle">Add players to teams and maintain your player list.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>＋ Add Player</h2>
+        <form id="playerForm" class="management-form">
+          <label for="playerName">Player Name</label>
+          <input type="text" id="playerName" placeholder="Example: Rohit Sharma" required>
+          <label for="playerTeam">Select Team</label>
+          <select id="playerTeam" required><option value="">Loading teams...</option></select>
+          <label for="playerRole">Player Role</label>
+          <select id="playerRole">
+            <option value="">Select Role</option>
+            <option value="Batter">Batter</option>
+            <option value="Bowler">Bowler</option>
+            <option value="All-rounder">All-rounder</option>
+            <option value="Wicketkeeper">Wicketkeeper</option>
+          </select>
+          <button type="submit" id="addPlayerButton">Save Player</button>
+          <p id="playerMessage" role="status"></p>
+        </form>
+      </div>
+      <div class="team-list">
+        <h2>Registered Players</h2>
+        <div id="playersList">Loading players...</div>
+      </div>
+    </section>
+
+    <!-- MATCHES -->
+    <section id="matches" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">MATCH MANAGEMENT</p>
+        <h1>Create a <span>Match</span></h1>
+        <p class="subtitle">Schedule a standalone match between your saved teams.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>＋ New Match</h2>
+        <form id="matchForm" class="management-form">
+          <label for="matchTitle">Match Title</label>
+          <input type="text" id="matchTitle" placeholder="Example: Mumbai vs Chennai" required>
+          <label for="teamA">Team A</label>
+          <select id="teamA" required><option value="">Select Team A</option></select>
+          <label for="teamB">Team B</label>
+          <select id="teamB" required><option value="">Select Team B</option></select>
+          <label for="matchFormat">Match Format</label>
+          <select id="matchFormat">
+            <option value="T20">T20</option><option value="ODI">ODI</option>
+            <option value="Test">Test</option><option value="Custom">Custom</option>
+          </select>
+          <label for="matchOvers">Overs Per Innings</label>
+          <input type="number" id="matchOvers" value="20" min="1" max="100" required>
+          <label for="matchVenue">Venue (Optional)</label>
+          <input type="text" id="matchVenue" placeholder="Ground or stadium">
+          <label for="matchDate">Scheduled Date and Time (Optional)</label>
+          <input type="datetime-local" id="matchDate">
+          <button type="submit" id="createMatchButton">Create Match</button>
+          <p id="matchMessage" role="status"></p>
+        </form>
+      </div>
+      <div class="team-list">
+        <h2>Created Matches</h2>
+        <div id="matchesList">Loading matches...</div>
+      </div>
+    </section>
+
+    <!-- LIVE SCORING -->
+    <section id="scoring" class="page-section management-section scoring-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">MATCH CONTROL</p>
+        <h1>Live <span>Scoring</span></h1>
+        <p class="subtitle">Select a match and record each delivery.</p>
+      </div>
+      <div class="scoring-panel">
+        <h3>01 / Select Match</h3>
+        <label for="scoringMatch">Choose Match</label>
+        <select id="scoringMatch"><option value="">Loading matches...</option></select>
+        <label for="battingTeam">Batting First / Next</label>
+        <select id="battingTeam"><option value="">Select batting team</option></select>
+        <button type="button" id="startInningsButton">Start Innings</button>
+        <p id="inningsMessage" role="status"></p>
+      </div>
+      <div class="scoring-panel">
+        <h3>02 / Current Innings</h3>
+        <p id="currentInningsInfo">Select a match and start an innings.</p>
+        <div class="score-display">
+          <span class="score-label">CURRENT SCORE</span>
+          <strong id="currentScore">0/0</strong>
+          <span id="currentOvers">0.0 Overs</span>
+        </div>
+        <label for="scoringBatter">Current Batter</label>
+        <select id="scoringBatter"><option value="">Select batter</option></select>
+        <label for="scoringBowler">Current Bowler</label>
+        <select id="scoringBowler"><option value="">Select bowler</option></select>
+      </div>
+      <div class="scoring-panel">
+        <h3>03 / Record Delivery</h3>
+        <p>Select runs scored by the batter.</p>
+        <div class="run-buttons">
+          <button type="button" class="run-button" data-runs="0">0</button>
+          <button type="button" class="run-button" data-runs="1">1</button>
+          <button type="button" class="run-button" data-runs="2">2</button>
+          <button type="button" class="run-button" data-runs="3">3</button>
+          <button type="button" class="run-button" data-runs="4">4</button>
+          <button type="button" class="run-button" data-runs="6">6</button>
+        </div>
+        <p id="selectedRuns">Selected runs: 0</p>
+        <label for="extraType">Extra Type</label>
+        <select id="extraType">
+          <option value="none">No extra</option><option value="wide">Wide</option>
+          <option value="no_ball">No Ball</option><option value="bye">Bye</option>
+          <option value="leg_bye">Leg Bye</option>
+        </select>
+        <label for="extraRuns">Extra Runs</label>
+        <input type="number" id="extraRuns" value="0" min="0" max="100">
+        <label for="wicketType">Wicket Type (Optional)</label>
+        <select id="wicketType">
+          <option value="">No wicket</option><option value="bowled">Bowled</option>
+          <option value="caught">Caught</option><option value="lbw">LBW</option>
+          <option value="run_out">Run Out</option><option value="stumped">Stumped</option>
+          <option value="hit_wicket">Hit Wicket</option><option value="retired_out">Retired Out</option>
+          <option value="obstructing_field">Obstructing the Field</option>
+          <option value="hit_ball_twice">Hit the Ball Twice</option>
+        </select>
+        <label for="dismissedPlayer">Dismissed Player</label>
+        <select id="dismissedPlayer"><option value="">Select dismissed player</option></select>
+        <label for="deliveryCommentary">Commentary (Optional)</label>
+        <input type="text" id="deliveryCommentary" placeholder="Example: Excellent cover drive!">
+        <button type="button" id="recordBallButton">Record Ball</button>
+        <p id="scoringMessage" role="status"></p>
+        <button type="button" id="undoBallButton" class="undo-button">↶ Undo Last Ball</button>
+      </div>
+      <div class="team-list">
+        <h2>Ball-by-Ball History</h2>
+        <div id="deliveryHistory">No deliveries recorded yet.</div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="page-section management-section" hidden>
+      <div class="page-top">
+        <button type="button" class="back-button" data-page="overview">← Home</button>
+        <p class="eyebrow">ACCOUNT</p>
+        <h1>Settings</h1>
+        <p class="subtitle">Basic dashboard and account controls.</p>
+      </div>
+      <div class="page-action-card">
+        <h2>Admin Account</h2>
+        <p>Manage your WICKETRA admin session.</p>
+        <button type="button" id="settingsLogoutButton">Log Out</button>
+      </div>
+    </section>
+
+    <p id="dashboardMessage" role="status"></p>
+  </main>
+
+  <footer class="dashboard-footer">
+    <div class="brand">WICKET<span>RA</span></div>
+    <p>The Pulse of Every Ball.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const pageIds = [
+        "overview", "createTournament", "allTournaments", "teams",
+        "registerTeams", "fixtures", "standings", "players",
+        "matches", "scoring", "settings"
+      ];
+
+      function openPage(pageId) {
+        if (!pageIds.includes(pageId)) return;
+        pageIds.forEach(id => {
+          const page = document.getElementById(id);
+          if (page) page.hidden = id !== pageId;
+        });
+        document.querySelectorAll(".dashboard-nav a").forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === "#" + pageId);
+        });
+        history.replaceState(null, "", "#" + pageId);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      document.addEventListener("click", event => {
+        const control = event.target.closest(".dashboard-nav a, .dashboard-card, [data-page]");
+        if (!control) return;
+        const pageId = control.dataset.page || control.getAttribute("href")?.replace("#", "");
+        if (pageIds.includes(pageId)) {
+          event.preventDefault();
+          openPage(pageId);
+        }
+      });
+
+      const settingsLogout = document.getElementById("settingsLogoutButton");
+      const logout = document.getElementById("logoutButton");
+      if (settingsLogout && logout) {
+        settingsLogout.addEventListener("click", () => logout.click());
+      }
+
+      const initialPage = location.hash.replace("#", "");
+      openPage(pageIds.includes(initialPage) ? initialPage : "overview");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b0a">
+  <title>WICKETRA — The Pulse of Every Ball</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="brand">WICKET<span>RA</span></a>
+
+    <nav>
+      <a href="#live">Live</a>
+      <a href="#upcoming">Upcoming</a>
+      <a href="#history">Results</a>
+      <a href="#leaderboard">Tournaments</a>
+    </nav>
+
+    <a href="admin.html" class="admin-link">Admin Login ↗</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">THE HOME OF LIVE CRICKET</p>
+        <h1>THE PULSE OF<br><span>EVERY BALL.</span></h1>
+        <p class="hero-description">
+          Every run. Every wicket. Every moment.
+          Follow the game as it happens.
+        </p>
+        <a href="#live" class="primary-btn">Explore Live Matches ↗</a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="cricket-ball">W</div>
+        <span class="orbit orbit-one"></span>
+        <span class="orbit orbit-two"></span>
+        <p class="visual-caption">CRICKET NEVER STOPS.</p>
+      </div>
+    </section>
+
+    <!-- LIVE RUN ANNOUNCEMENT -->
+    <div id="runAnnouncement"
+         class="run-announcement"
+         aria-live="polite"
+         aria-atomic="true"
+         hidden>
+      <span id="runAnnouncementText">1 RUN</span>
+    </div>
+
+    <!-- LIVE MATCHES -->
+    <section class="section" id="live">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">FOLLOW THE ACTION</p>
+          <h2>Live Matches <span class="live-dot"></span></h2>
+        </div>
+        <span class="section-label">LIVE CENTER</span>
+      </div>
+
+      <div id="liveMatches" class="match-grid">
+        <div class="empty-state">Loading live matches...</div>
+      </div>
+    </section>
+
+    <!-- UPCOMING MATCHES -->
+    <section class="section" id="upcoming">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT'S NEXT</p>
+          <h2>Upcoming Matches</h2>
+        </div>
+      </div>
+
+      <div id="upcomingMatches" class="match-grid">
+        <div class="empty-state">Loading upcoming matches...</div>
+      </div>
+    </section>
+
+    <!-- RECENT RESULTS -->
+    <section class="section" id="history">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PAST BATTLES</p>
+          <h2>Recent Results</h2>
+        </div>
+      </div>
+
+      <div id="recentMatches" class="match-grid">
+        <div class="empty-state">Loading results...</div>
+      </div>
+    </section>
+
+    <!-- TOURNAMENT LEADERBOARD -->
+    <section class="section" id="leaderboard">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE RACE FOR THE TOP</p>
+          <h2>Tournament Standings</h2>
+        </div>
+        <span class="section-label">LIVE RANKINGS</span>
+      </div>
+
+      <div class="leaderboard-toolbar">
+        <div>
+          <label for="tournamentSelect">SELECT TOURNAMENT</label>
+          <select id="tournamentSelect">
+            <option value="">Loading tournaments...</option>
+          </select>
+        </div>
+
+        <span class="leaderboard-live">
+          <span class="live-dot"></span>
+          AUTO UPDATED
+        </span>
+      </div>
+
+      <div id="leaderboardContent" class="leaderboard-content">
+        <div class="empty-state">Loading tournament standings...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <a href="#" class="brand">WICKET<span>RA</span></a>
+    <p>The Pulse of Every Ball.</p>
+    <p class="copyright">© 2026 WICKETRA. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
